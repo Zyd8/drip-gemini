@@ -1,0 +1,37 @@
+:root{
+    --body-lm-f: #000;
+    --body-lm-bg: #fff;
+    --body-lm-bg-d: #f7f7f7;
+    --body-dm-f: #fff;
+    --body-dm-bg: #000;
+    --test-yellow: #FFFF00;
+}
+
+.code-block {
+    background-color: var(--body-lm-bg);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, .2);
+    width: 600px;
+    margin-left: 40px;
+}
+
+.code-path {
+    font-family: sans-serif;
+    background-color: var(--body-lm-bg-d);
+    color: var(--body-lm-f);
+    padding: 5px 7px;
+}
+
+.code-path h3 {
+    margin: 0;
+}
+
+.code-code {
+    font-family: sans-serif;
+    background-color: var(--body-lm-bg);
+    color: var(--body-lm-f);
+    padding: 5px 7px;
+}
+
+.code-code pre {
+    margin: 0;
+}
