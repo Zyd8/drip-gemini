@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $username = validate_input($_POST["username"]);
         $password = validate_input($_POST["password"]);
-        if (authenticate("users", "username='$username'", "password='$password'")) {
+        if (authenticate("users", "user_name='$username'", "password='$password'")) {
             direct_to("/home");
             die;
         } else {
