@@ -1,11 +1,15 @@
 <?php 
 session_start();
 
+/*DEBUG ERROR*/
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 /*IMPORTING LIBRARIES*/
-require("libraries\GLIB_Debug.php");
-require("libraries\GLIB_Database.php");
-require("libraries\GLIB_DBFunctions.php");
-require("libraries\GLIB_Functions.php");
+require('libraries/GLIB_Debug.php');
+require('libraries/GLIB_Database.php');
+require('libraries/GLIB_DBFunctions.php');
+require('libraries/GLIB_Functions.php');
 
 /*IMPORTING FRAMEWORKS*/
 require('urls/Paths.php');

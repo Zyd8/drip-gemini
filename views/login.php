@@ -33,6 +33,7 @@
 
 /* DATA END */
 //$data->data_end();
+
 require('logics/login.php');
 ?>
 
@@ -42,8 +43,8 @@ require('logics/login.php');
             TEST LIBRARY
             
         </title>
-        <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
-        <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css"> -->
+        <!-- <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     </head>
     <body>
         

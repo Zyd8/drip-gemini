@@ -13,6 +13,7 @@ class path {
 
             if (isset($new_uri[1]) && $new_uri[1] === $path['path'] || $uri === $path['path']) {
                 require 'views/' . $path['name'] . '.php';
+                require 'views/' . $path['name'] . '.php';
                 return;
             }   
 
