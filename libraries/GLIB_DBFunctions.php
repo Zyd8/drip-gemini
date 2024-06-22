@@ -16,4 +16,11 @@ function authenticate ($tablename, $username, $password){
     }
 }
 
+function validate_input($input){
+    $input = trim($input);
+    $input = stripslashes($input);
+    $input = htmlspecialchars($input);
+    return $input;
+}
+
 ?>

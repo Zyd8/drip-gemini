@@ -1,7 +1,7 @@
 <?php
 
 path::request([
-    ["path" => "/", "name" => "app"],
+    ["path" => "/", "name" => "login"],
     ["path" => "/home", "name" => "home"]
 ]);
 
