@@ -1,9 +1,4 @@
 <?php 
-require("libraries\GLIB_Debug.php");
-require("libraries\GLIB_Database.php");
-require("libraries\GLIB_DBFunctions.php");
-
-
 /* ADD INSTANCE ( OOP ) */
 //$data = new database ();
 
