@@ -6,11 +6,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $username = validate_input($_POST["username"]);
         $password = validate_input($_POST["password"]);
-        if (authenticate("users", "user_name='$username'", "password='$password'")) {
-            direct_to("/home");
+        if (authenticate_both("users", "username='$username'", "password='$password'")) {
+            $db = new database();
+            $user_id = $db->data_read("ID", "users", "username = '$username'");
+            $db->data_end();
+            $_SESSION["ID"] = $user_id;
+            direct_to("/");
             die;
         } else {
-            direct_to("/", "?a=d");
+            direct_to("/login", "?a=d");
         }
 
     }
