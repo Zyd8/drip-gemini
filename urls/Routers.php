@@ -1,8 +1,9 @@
 <?php
 
 path::request([
-    ["path" => "/", "name" => "login"],
-    ["path" => "/home", "name" => "home"]
+    ["path" => "/", "name" => "home"],
+    ["path" => "/login", "name" => "login"],
+    ["path" => "/register", "name" => "register"]
 ]);
 
 ?>

@@ -51,7 +51,7 @@ require('logics/login.php');
 
         <section>
             <div class="loginform-container">
-                <h3 class="login-text">Login</h3>
+                <h2 class="login-text">Login</h2>
                 <hr>
 
                 <form class="semi-cont" method="post" action="">
@@ -64,8 +64,8 @@ require('logics/login.php');
                         <label>Password:</label><br>
                         <input type="password" name="password" autocomplete="new-password" required>
                     </div>
-                    <input type="submit" name="login_form">
-                    <h1>ERROR CODE</h1>
+                    <input type="submit" name="login_form" value="Login">
+                    <a href="/register">Register Now</a>
                 </form>
             </div>
         </section>

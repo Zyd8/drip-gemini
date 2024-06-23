@@ -1,3 +1,6 @@
+<?php
+require('logics/home.php'); 
+?>
 <html>
     <head>
         <title>Home Page | Guiri</title>
@@ -9,8 +12,10 @@
 
 <body>
     
-<h1>HOME</h1>
-<a href="/">Login</a>
+<h2 class="login-text">Login</h2>
+<hr>
+
+<a href="logics/logout.php">Logout</a>
 
 <div class="code-block">
 

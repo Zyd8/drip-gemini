@@ -1,5 +1,5 @@
 <?php 
-function authenticate ($tablename, $username, $password){
+function authenticate_both ($tablename, $username, $password){
     $user_name = explode("=", $username);
     $pass_word = explode("=", $password);
     $un = $user_name[0];
@@ -16,11 +16,18 @@ function authenticate ($tablename, $username, $password){
     }
 }
 
-function validate_input($input){
-    $input = trim($input);
-    $input = stripslashes($input);
-    $input = htmlspecialchars($input);
-    return $input;
+function authenticate ($tablename, $username){
+    $user_name = explode("=", $username);
+    $un = $user_name[0];
+    $un1 = $user_name[1];
+    $db = new database ();
+    $arr = ( $db->data_read("*", "$tablename", "$un = $un1"));
+    $db->data_end();
+    if(count($arr) >= 1){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 ?>
