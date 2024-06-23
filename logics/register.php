@@ -13,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (authenticate("users", "username='$username'")) {
 
                 echo "Username is Already taken";
-                die();
 
             } else {
 
