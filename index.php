@@ -19,7 +19,9 @@ require('urls/Routers.php');
 $_SESSION["dbhost"] = "localhost"; //sql105.infinityfree.com || localhost
 $_SESSION["dbusername"] = "root"; //if0_36607061 || root
 $_SESSION["dbpassword"] = ""; //w5cW3iQFeYN || ""
-$_SESSION["dbname"] = "testlib"; //if0_36607061_users || testlib
+$_SESSION["dbname"] = "outdrip_db"; //if0_36607061_users || testlib
 $_SESSION["dbport"] = "3306"; //3306 || 3306
+
+$db = new database ();
 
 ?>

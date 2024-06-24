@@ -8,20 +8,93 @@
         public $dbport;
         public $con;
 
-        //THIS WILL CREATE AN INSTANCE OF DATABASE
-        public function __construct() {
-            $this->dbhost = $_SESSION["dbhost"];
-            $this->dbuser = $_SESSION["dbusername"];
-            $this->dbpassword = $_SESSION["dbpassword"];
-            $this->dbname = $_SESSION["dbname"];
-            $this->dbport = $_SESSION["dbport"];
+    //THIS WILL CREATE AN INSTANCE OF DATABASE
+    public function __construct() {
+        $this->dbhost = $_SESSION["dbhost"];
+        $this->dbuser = $_SESSION["dbusername"];
+        $this->dbpassword = $_SESSION["dbpassword"];
+        $this->dbname = $_SESSION["dbname"];
+        $this->dbport = $_SESSION["dbport"];
 
-            $this->con = new \mysqli($this->dbhost, $this->dbuser, $this->dbpassword, $this->dbname, $this->dbport);
+        // Connect to MySQL server without specifying the database
+        $this->con = new mysqli($this->dbhost, $this->dbuser, $this->dbpassword, "", $this->dbport);
 
-            if ($this->con->connect_error) {
-                die("Connection failed: " . $this->con->connect_error);
-            }
+        // Check connection
+        if ($this->con->connect_error) {
+            die("Connection failed: " . $this->con->connect_error);
         }
+
+        // Create the database if it doesn't exist
+        $this->createDatabaseIfNotExists();
+
+        // Now connect to the specified database
+        $this->con->select_db($this->dbname);
+
+        // Create necessary tables
+        $this->create_users_table("users");
+        $this->create_closet_table("closet");
+
+        // Uncomment when favorite functionality is being developed
+        // $this->create_favorite_table("favorite");
+        
+
+        // Check connection again after selecting the database
+        if ($this->con->connect_error) {
+            die("Connection failed: " . $this->con->connect_error);
+        }
+    }
+
+    // CREATE USERS TABLE IF NOT EXISTS
+    private function create_users_table($tablename) {
+        $query = "CREATE TABLE IF NOT EXISTS $tablename (
+            ID VARCHAR(11),
+            username VARCHAR(50) NOT NULL,
+            password VARCHAR(255) NOT NULL
+        )";
+        $result = $this->con->query($query);
+    
+        // PRINTS ONLY WHEN THERE IS AN ERROR
+        if (!$result) {
+            echo "Error creating table: " . $this->con->error;
+        } 
+    }
+
+    // CREATE CLOSET TABLE IF NOT EXISTS
+    private function create_closet_table($tablename) {
+        $query = "CREATE TABLE IF NOT EXISTS $tablename (
+            ID VARCHAR(11),
+            user_id VARCHAR(11),
+            `path` VARCHAR(100),
+            file_name VARCHAR(255)
+        )";
+        $result = $this->con->query($query);
+    
+        if (!$result) {
+            echo "Error creating table: " . $this->con->error;
+        }
+    }
+
+    // CREATE FAVORITE TABLE IF NOT EXISTS
+    private function create_favorite_table($tablename) {
+        $query = "CREATE TABLE IF NOT EXISTS $tablename (
+            ID VARCHAR(11),
+            JSON_string VARCHAR(255) NOT NULL,
+            prompt VARCHAR(255) NOT NULL,
+        )";
+        $result = $this->con->query($query);
+
+        if (!$result) {
+            echo "Error creating table: " . $this->con->error;
+        }
+    }
+    
+
+    private function createDatabaseIfNotExists() {
+        $sql = "CREATE DATABASE IF NOT EXISTS $this->dbname";
+        if (!$this->con->query($sql) === TRUE) {
+            die("Error creating database: " . $this->con->error);
+        }
+    }
 
         //ADD A ROW IN THE SPECIFIC DATABASE
         public function data_create ($tablename, $data) {
