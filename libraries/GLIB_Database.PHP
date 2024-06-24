@@ -8,20 +8,44 @@
         public $dbport;
         public $con;
 
-        //THIS WILL CREATE AN INSTANCE OF DATABASE
-        public function __construct() {
-            $this->dbhost = $_SESSION["dbhost"];
-            $this->dbuser = $_SESSION["dbusername"];
-            $this->dbpassword = $_SESSION["dbpassword"];
-            $this->dbname = $_SESSION["dbname"];
-            $this->dbport = $_SESSION["dbport"];
+    //THIS WILL CREATE AN INSTANCE OF DATABASE
+    public function __construct() {
+        $this->dbhost = $_SESSION["dbhost"];
+        $this->dbuser = $_SESSION["dbusername"];
+        $this->dbpassword = $_SESSION["dbpassword"];
+        $this->dbname = $_SESSION["dbname"];
+        $this->dbport = $_SESSION["dbport"];
 
-            $this->con = new \mysqli($this->dbhost, $this->dbuser, $this->dbpassword, $this->dbname, $this->dbport);
+        // Connect to MySQL server without specifying the database
+        $this->con = new mysqli($this->dbhost, $this->dbuser, $this->dbpassword, "", $this->dbport);
 
-            if ($this->con->connect_error) {
-                die("Connection failed: " . $this->con->connect_error);
-            }
+        // Check connection
+        if ($this->con->connect_error) {
+            die("Connection failed: " . $this->con->connect_error);
         }
+
+        // Create the database if it doesn't exist
+        $this->createDatabaseIfNotExists();
+
+        // Now connect to the specified database
+        $this->con->select_db($this->dbname);
+
+        // Check connection again after selecting the database
+        if ($this->con->connect_error) {
+            die("Connection failed: " . $this->con->connect_error);
+        } else {
+            echo "Connected successfully to the database " . $this->dbname;
+        }
+    }
+
+    private function createDatabaseIfNotExists() {
+        $sql = "CREATE DATABASE IF NOT EXISTS $this->dbname";
+        if ($this->con->query($sql) === TRUE) {
+            echo "Database created or already exists.";
+        } else {
+            die("Error creating database: " . $this->con->error);
+        }
+    }
 
         //ADD A ROW IN THE SPECIFIC DATABASE
         public function data_create ($tablename, $data) {
