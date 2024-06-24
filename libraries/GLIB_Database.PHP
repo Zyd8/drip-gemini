@@ -31,9 +31,9 @@
         $this->con->select_db($this->dbname);
 
         // Create necessary tables
-        $this->create_user_table("user");
+        $this->create_users_table("users");
         $this->create_closet_table("closet");
-        $this->create_favorite_table("favorite");
+        // $this->create_favorite_table("favorite");
         
 
         // Check connection again after selecting the database
@@ -44,10 +44,10 @@
         }
     }
 
-    // CREATE USER TABLE IF NOT EXISTS
-    private function create_user_table($tablename) {
+    // CREATE USERS TABLE IF NOT EXISTS
+    private function create_users_table($tablename) {
         $query = "CREATE TABLE IF NOT EXISTS $tablename (
-            id INT(6) AUTO_INCREMENT PRIMARY KEY,
+            id VARCHAR(11),
             username VARCHAR(50) NOT NULL,
             password VARCHAR(255) NOT NULL
         )";
@@ -63,11 +63,10 @@
     // CREATE CLOSET TABLE IF NOT EXISTS
     private function create_closet_table($tablename) {
         $query = "CREATE TABLE IF NOT EXISTS $tablename (
-            id INT(6) AUTO_INCREMENT PRIMARY KEY,
-            item_name VARCHAR(100) NOT NULL,
-            image_path VARCHAR(255) NOT NULL,
-            user_id INT(6) NOT NULL,
-            FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+            id VARCHAR(11),
+            user_id VARCHAR(11),
+            `path` VARCHAR(100),
+            file_name VARCHAR(255)
         )";
         $result = $this->con->query($query);
     
@@ -81,11 +80,9 @@
     // CREATE FAVORITE TABLE IF NOT EXISTS
     private function create_favorite_table($tablename) {
         $query = "CREATE TABLE IF NOT EXISTS $tablename (
-            id INT(6) AUTO_INCREMENT PRIMARY KEY,
+            id VARCHAR(11),
             JSON_string VARCHAR(255) NOT NULL,
             prompt VARCHAR(255) NOT NULL,
-            user_id INT(6) NOT NULL,
-            FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
         )";
         $result = $this->con->query($query);
 
