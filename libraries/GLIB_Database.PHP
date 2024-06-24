@@ -33,46 +33,43 @@
         // Create necessary tables
         $this->create_users_table("users");
         $this->create_closet_table("closet");
+
+        // Uncomment when favorite functionality is being developed
         // $this->create_favorite_table("favorite");
         
 
         // Check connection again after selecting the database
         if ($this->con->connect_error) {
             die("Connection failed: " . $this->con->connect_error);
-        } else {
-            echo "Connected successfully to the database " . $this->dbname;
         }
     }
 
     // CREATE USERS TABLE IF NOT EXISTS
     private function create_users_table($tablename) {
         $query = "CREATE TABLE IF NOT EXISTS $tablename (
-            id VARCHAR(11),
+            ID VARCHAR(11),
             username VARCHAR(50) NOT NULL,
             password VARCHAR(255) NOT NULL
         )";
         $result = $this->con->query($query);
     
-        if ($result) {
-            echo "Table $tablename created successfully.";
-        } else {
+        // PRINTS ONLY WHEN THERE IS AN ERROR
+        if (!$result) {
             echo "Error creating table: " . $this->con->error;
-        }
+        } 
     }
 
     // CREATE CLOSET TABLE IF NOT EXISTS
     private function create_closet_table($tablename) {
         $query = "CREATE TABLE IF NOT EXISTS $tablename (
-            id VARCHAR(11),
+            ID VARCHAR(11),
             user_id VARCHAR(11),
             `path` VARCHAR(100),
             file_name VARCHAR(255)
         )";
         $result = $this->con->query($query);
     
-        if ($result) {
-            echo "Table $tablename created successfully.";
-        } else {
+        if (!$result) {
             echo "Error creating table: " . $this->con->error;
         }
     }
@@ -80,26 +77,21 @@
     // CREATE FAVORITE TABLE IF NOT EXISTS
     private function create_favorite_table($tablename) {
         $query = "CREATE TABLE IF NOT EXISTS $tablename (
-            id VARCHAR(11),
+            ID VARCHAR(11),
             JSON_string VARCHAR(255) NOT NULL,
             prompt VARCHAR(255) NOT NULL,
         )";
         $result = $this->con->query($query);
 
-        if ($result) {
-            echo "Table $tablename created successfully.";
-        } else {
+        if (!$result) {
             echo "Error creating table: " . $this->con->error;
         }
     }
     
-    
 
     private function createDatabaseIfNotExists() {
         $sql = "CREATE DATABASE IF NOT EXISTS $this->dbname";
-        if ($this->con->query($sql) === TRUE) {
-            echo "Database created or already exists.";
-        } else {
+        if (!$this->con->query($sql) === TRUE) {
             die("Error creating database: " . $this->con->error);
         }
     }
