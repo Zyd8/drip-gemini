@@ -23,4 +23,9 @@ function random_num($quantity){
     return $number;
 }
 
+function link_okay($link){
+    $new = urlencode($link);
+    return $new;
+}
+
 ?>

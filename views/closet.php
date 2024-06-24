@@ -2,6 +2,8 @@
 require('logics/validation.php'); 
 require('logics/closet-form.php');
 require('logics/closet-show.php');
+require('logics/closet-delete.php');
+require('logics/functions.php');
 ?>
 
 <html>
@@ -23,11 +25,15 @@ require('logics/closet-show.php');
             <input type="submit" name="closet_form">
         </form>
 
-        <div>
+        <div style="display: flex">
 
             <?php foreach($datas as $data): ?>
-                <img class="upload-imgs" src="<?php echo $data['path']; ?>" alt="Img-Upload">
+                <div>
+                    <img class="upload-imgs" src="<?php echo $data['path']; ?>" alt="Img-Upload"> <br>
+                    <a href="?dvx=<?php echo link_okay($data['ID']); ?>&idshs=<?php echo link_okay($data['file_name']); ?>&pasdsf=<?php echo link_okay(link_set($data['path'])); ?>">Delete</a>
+                </div>
             <?php endforeach; ?>
+
         </div>
 
     </body>
