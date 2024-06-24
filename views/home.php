@@ -1,4 +1,5 @@
 <?php
+require('logics/validation.php'); 
 require('logics/home.php'); 
 ?>
 <html>

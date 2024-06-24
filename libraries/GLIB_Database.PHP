@@ -32,9 +32,10 @@
             $query = "INSERT INTO $tablename ($columns) VALUES ($placeholders)";
             $stmt = $this->con->prepare($query);
 
-            $types = str_repeat('s', count($data)); // Assuming all data are strings. Adjust as necessary.
             $values = array_values($data);
-            
+
+            $types = str_repeat('s', count($values)); // Assuming all data are strings. Adjust as necessary.
+
             $stmt->bind_param($types, ...$values);
             $stmt->execute();
             $stmt->close();
@@ -55,9 +56,9 @@
         }
 
         //READ ALL OF THE DATA BASE ON USERS CHOICE
-        public function data_read_all ($select, $tablename) {
+        public function data_read_all ($tablename) {
             //$str = $this->addslash($value);
-            $query = "SELECT $select FROM $tablename";
+            $query = "SELECT * FROM $tablename";
             $result = $this->con->query($query);
             $datas = [];
             while($row = $result->fetch_assoc()){

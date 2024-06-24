@@ -1,11 +1,11 @@
 <?php 
-function authenticate_both ($tablename, $username, $password){
-    $user_name = explode("=", $username);
-    $pass_word = explode("=", $password);
-    $un = $user_name[0];
-    $un1 = $user_name[1];
-    $pw = $pass_word[0];
-    $pw1 = $pass_word[1];
+function authenticate_both ($tablename, $argument1, $argument2){
+    $argument1ex = explode("=", $argument1);
+    $argument2ex = explode("=", $argument2);
+    $un = $argument1ex[0];
+    $un1 = $argument1ex[1];
+    $pw = $argument2ex[0];
+    $pw1 = $argument2ex[1];
     $db = new database ();
     $arr = ( $db->data_read("*", "$tablename", "$un = $un1 and $pw = $pw1"));
     $db->data_end();
@@ -16,10 +16,10 @@ function authenticate_both ($tablename, $username, $password){
     }
 }
 
-function authenticate ($tablename, $username){
-    $user_name = explode("=", $username);
-    $un = $user_name[0];
-    $un1 = $user_name[1];
+function authenticate ($tablename, $argument1){
+    $argument1ex = explode("=", $argument1);
+    $un = $argument1ex[0];
+    $un1 = $argument1ex[1];
     $db = new database ();
     $arr = ( $db->data_read("*", "$tablename", "$un = $un1"));
     $db->data_end();

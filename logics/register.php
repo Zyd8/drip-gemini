@@ -13,17 +13,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (authenticate("users", "username='$username'")) {
 
                 echo "Username is Already taken";
-                die();
 
             } else {
 
                 $db = new database();
 
+                $generated_id = random_num(10);
+                $has = authenticate("users", "id=$generated_id");
+
+                while($has){    
+                    $generated_id = random_num(10);
+                    $has = authenticate("users", "id=$generated_id");
+                }
                 $user = [
+                    'ID' => $generated_id,
                     'username' => $username,
                     'password' => $password1
                 ];
-
                 $db->data_create("users", $user);
                 $db->data_end();
                 direct_to("/login");

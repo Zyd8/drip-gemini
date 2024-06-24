@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $db = new database();
             $user_id = $db->data_read("ID", "users", "username = '$username'");
             $db->data_end();
-            $_SESSION["ID"] = $user_id;
+            $_SESSION["ID"] = $user_id[0]['ID'];
             direct_to("/");
             die;
         } else {
