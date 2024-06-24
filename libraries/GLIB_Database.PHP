@@ -30,6 +30,12 @@
         // Now connect to the specified database
         $this->con->select_db($this->dbname);
 
+        // Create necessary tables
+        $this->create_user_table("user");
+        $this->create_closet_table("closet");
+        $this->create_favorite_table("favorite");
+        
+
         // Check connection again after selecting the database
         if ($this->con->connect_error) {
             die("Connection failed: " . $this->con->connect_error);
@@ -37,6 +43,60 @@
             echo "Connected successfully to the database " . $this->dbname;
         }
     }
+
+    // CREATE USER TABLE IF NOT EXISTS
+    private function create_user_table($tablename) {
+        $query = "CREATE TABLE IF NOT EXISTS $tablename (
+            id INT(6) AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(50) NOT NULL,
+            password VARCHAR(255) NOT NULL
+        )";
+        $result = $this->con->query($query);
+    
+        if ($result) {
+            echo "Table $tablename created successfully.";
+        } else {
+            echo "Error creating table: " . $this->con->error;
+        }
+    }
+
+    // CREATE CLOSET TABLE IF NOT EXISTS
+    private function create_closet_table($tablename) {
+        $query = "CREATE TABLE IF NOT EXISTS $tablename (
+            id INT(6) AUTO_INCREMENT PRIMARY KEY,
+            item_name VARCHAR(100) NOT NULL,
+            image_path VARCHAR(255) NOT NULL,
+            user_id INT(6) NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+        )";
+        $result = $this->con->query($query);
+    
+        if ($result) {
+            echo "Table $tablename created successfully.";
+        } else {
+            echo "Error creating table: " . $this->con->error;
+        }
+    }
+
+    // CREATE FAVORITE TABLE IF NOT EXISTS
+    private function create_favorite_table($tablename) {
+        $query = "CREATE TABLE IF NOT EXISTS $tablename (
+            id INT(6) AUTO_INCREMENT PRIMARY KEY,
+            JSON_string VARCHAR(255) NOT NULL,
+            prompt VARCHAR(255) NOT NULL,
+            user_id INT(6) NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+        )";
+        $result = $this->con->query($query);
+
+        if ($result) {
+            echo "Table $tablename created successfully.";
+        } else {
+            echo "Error creating table: " . $this->con->error;
+        }
+    }
+    
+    
 
     private function createDatabaseIfNotExists() {
         $sql = "CREATE DATABASE IF NOT EXISTS $this->dbname";
