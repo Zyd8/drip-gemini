@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
             $filesize = $_FILES['image']['size'];
             $tmpname = $_FILES['image']['tmp_name'];
 
-            $valid_input = ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif'];
+            $valid_input = ['jpg', 'jpeg', 'png', 'webp', '.heic', 'heif'];
             $imgtype = explode(".", $filename);
             $imgtype = strtolower(end($imgtype));
 
@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
             
             } else {
 
-                if($filesize > 1000000) {
+                if($filesize > 10000000) {
 
                     echo "FILE UPLOAD ERROR: Uploaded file is too large.";
 
@@ -48,8 +48,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
                     }
 
                     $pathwithimg = $parent_directory . "/" . $user_id . "/" . $new_name;
-                    
-                    move_uploaded_file($tmpname, "views/uploaded_img/" . "$user_id/" . $new_name);
+
+                    compress_image_and_move($tmpname, $pathwithimg, 70);
 
                     $closets = [
                         'ID' => $generated_id,
@@ -67,4 +67,26 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
 }
+
+function compress_image_and_move($source, $destination, $quality) {
+    $info = getimagesize($source);
+
+    if ($info['mime'] == 'image/jpeg' || $info['mime'] == 'image/pjpeg') {
+        $image = imagecreatefromjpeg($source);
+        imagejpeg($image, $destination, $quality);
+    } elseif ($info['mime'] == 'image/png') {
+        $image = imagecreatefrompng($source);
+        imagepng($image, $destination, floor($quality / 9));
+    } elseif ($info['mime'] == 'image/webp') {
+        $image = imagecreatefromwebp($source);
+        imagewebp($image, $destination, $quality);
+    } 
+     else {
+        echo "FILE UPLOAD ERROR: Unsupported image type.";
+        return;
+    }
+
+    imagedestroy($image);
+}
+
 ?>
