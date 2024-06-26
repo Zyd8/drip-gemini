@@ -96,6 +96,25 @@
         }
     }
 
+
+    // GET ALL COLUMN DATA SPECIFIC ONLY TO A USER
+    public function getUserData($tablename, $columnname, $user_id) {
+        $query = "SELECT $columnname FROM $tablename WHERE user_id = ?";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row[$columnname];
+        }
+
+        $stmt->close();
+        return $data;
+    }
+
+
         //ADD A ROW IN THE SPECIFIC DATABASE
         public function data_create ($tablename, $data) {
             //$str = $this->addslash($value);

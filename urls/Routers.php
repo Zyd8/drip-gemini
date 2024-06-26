@@ -4,7 +4,8 @@ path::request([
     ["path" => "/", "name" => "home"],
     ["path" => "/login", "name" => "login"],
     ["path" => "/register", "name" => "register"],
-    ["path" => "/closet", "name" => "closet"]
+    ["path" => "/closet", "name" => "closet"],
+    ["path" => "/tailoring", "name" => "tailoring"]
 ]);
 
 ?>
