@@ -23,8 +23,8 @@ DocumentRoot "C:/xampp/htdocs"
 ```
 rename to 
 ```
-DocumentRoot "C:/xampp/[project-name]"
-<Directory "C:/xampp/[project-name]">
+DocumentRoot "C:/xampp/htdocs/[project-name]"
+<Directory "C:/xampp/htdocs/[project-name]">
 ```
 
 5. clone the project
