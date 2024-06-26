@@ -6,8 +6,6 @@ https://github.com/guiribajustin2004/GuiriLibrary
 > By Justin Sheen Guiriba
 
 
-
-
 ## Configuration Prerequisites
 
 1. install xampp.
@@ -46,3 +44,17 @@ DocumentRoot "C:/xampp/htdocs/[project-name]"
 10. remove the ; from ";extension=gd"
 
 11. restart Apache and mySql from xampp control panel
+
+
+## API Setup
+
+1. After setting up the project, get your API key here
+```
+https://aistudio.google.com/app/apikey
+```
+
+2. Go to the project folder and go to the "api" folder.
+
+3. Inside there will be .env.example, rename it to .env only.
+
+4. Replace what comes after API_KEY= with the key that you copied.
