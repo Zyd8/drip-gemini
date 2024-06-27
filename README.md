@@ -29,7 +29,7 @@ DocumentRoot "C:/xampp/htdocs/[project-name]"
 
 6. move the project folder to 
 ``` 
-"C:/xampp/" 
+"C:/xampp/htdocs" 
 ```
 
 7. go to 
