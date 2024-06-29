@@ -63,6 +63,11 @@ https://aistudio.google.com/app/apikey
 ```
 pip install dotenv
 ```
+if it errors, try the follwing commmands:
+```
+pip install python-dotenv
+pip3 install python-dotenv
+```
 6. then to run the API:
 ```
 python main.py
