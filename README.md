@@ -6,7 +6,7 @@ https://github.com/guiribajustin2004/GuiriLibrary
 > By Justin Sheen Guiriba
 
 
-## Configuration Prerequisites
+## Backend Setup
 
 1. install xampp.
 
@@ -58,3 +58,12 @@ https://aistudio.google.com/app/apikey
 3. Inside there will be .env.example, rename it to .env only.
 
 4. Replace what comes after API_KEY= with the key that you copied.
+
+5. then go to the api folder in your terminal/cmd and type:
+```
+pip install dotenv
+```
+6. then to run the API:
+```
+python main.py
+```
